@@ -50,10 +50,10 @@ console.log(clasificarEdad(70)); // Debería mostrar: 'Adulto mayor'
 console.log("\nEjercicio 4: switch");
 // Escribe una función llamada 'obtenerColor' que reciba un número del 1 al 3 y devuelva: 1 → 'Rojo', 2 → 'Verde', 3 → 'Azul', otro → 'Color desconocido'
 function obtenerColor(number){
-  if(number = 1){return 'Rojo'}
-  else if(number = 2) {return 'Verde'}
-  else if(number= 3) {return 'Azul'}
-  else(number>3)
+  if(number === 1){return 'Rojo'}
+  else if(number === 2) {return 'Verde'}
+  else if(number === 3) {return 'Azul'}
+  else 
   {return 'Color desconocido'}
 }
 // Datos de prueba:
@@ -94,7 +94,7 @@ console.log("\nEjercicio 7: Bucle for");
 // Escribe una función llamada 'imprimirPares' que imprima los números pares del 2 al 20.
 
 function imprimirPares(){
-  for(let init = 0; init < 21; init+=2){
+  for(let init = 2; init < 21; init+=2){
     console.log(init);
   }
 }
@@ -133,9 +133,21 @@ contarImpares(10);
 
 console.log("\nEjercicio 10: Bucle do-while");
 // Escribe una función llamada 'pedirContraseña' que simule pedir contraseña hasta que sea 'admin' usando un array de intentos
+
+function pedirContrasena(passArray) {
+		for (let i = 0; i < passArray.length; i++){
+			console.log(`Intento ${i+1}:  ${passArray[i]}`);
+			if(passArray[i] === "admin") {
+			console.log("¡Contraseña correcta!");
+break;
+}else{
+	console.log("Incorrecto")
+}
+}}
+
 // Datos de prueba:
 const intentos = ['1234', 'qwerty', 'admin'];
-pedirContraseña(intentos);
+pedirContrasena(intentos);
 // Ejemplo de salida:
 // Intento 1: 1234
 // Intento 2: qwerty
@@ -144,11 +156,31 @@ pedirContraseña(intentos);
 
 console.log("\nEjercicio 11: Bucle for (array)");
 // Escribe una función llamada 'multiplicarArray' que reciba un array de números y devuelva el producto de todos ellos
+
+function multiplicarArray(numberArray){
+		let init = 1;
+		for(let i = 0; i < numberArray.lenght; i++){
+			init *= numberArray[i];
+}
+	return init;
+}
+
 // Datos de prueba:
 console.log(multiplicarArray([1, 2, 3, 4])); // Debería mostrar: 24
 
 console.log("\nEjercicio 12: Bucle while (factorial)");
 // Escribe una función llamada 'factorial' que reciba un número n y devuelva su factorial usando while
+
+function factorial(number) {
+		let result = 1;
+		while (number != 1){
+        result *= number;
+number--;
+}
+return result;
+}
+
+
 // Datos de prueba:
 console.log(factorial(5)); // Debería mostrar: 120
 
@@ -187,20 +219,35 @@ empleados.forEach(e => console.log(`${e.nombre} gana ${e.salario} euros`));
 
 console.log("\nEjercicio 16: map básico");
 // Utiliza map para crear un nuevo array con el cubo de cada número del array 'numeros'
+
+const cubos = [1,2, 3, 4, 5];
+const cubed = cubos.map(n => n**3);
+
 // Datos de prueba:
-console.log(cubos);
+console.log(cubed);
 // Debería mostrar: [1, 8, 27, 64, 125]
 
 console.log("\nEjercicio 17: map con strings");
 // Utiliza map para crear un nuevo array con las palabras en mayúsculas
+const words = ["hola", "mundo", "js"];
+const mayus = words.map(p => p.toUpperCase());
+
 // Datos de prueba:
 console.log(mayus);
 // Debería mostrar: ['HOLA', 'MUNDO', 'JS']
 
 console.log("\nEjercicio 18: map con objetos");
 // Utiliza map para crear un array con los salarios de los empleados
+
+const employees = [
+{name: "Juan", wage : 1200 },
+{name: "Ana", wage : 1500 }
+];
+
+const wages = employees.map(emp => emp.wage);
+
 // Datos de prueba:
-console.log(edades);
+console.log(wages);
 // Debería mostrar: [1200, 1500]
 
 console.log("\nEjercicio 19: Combinación map + forEach");
@@ -217,12 +264,39 @@ console.log("\nEjercicio 19: Combinación map + forEach");
 
 console.log("\nEjercicio 20: Tipos de funciones");
 // Crear función declarativa 'restar' y expresión 'modulo'
+
+function restar(a,b){
+return a-b;
+}
+
+const modulo = function(a,b) { return a%b;};
+
 // Datos de prueba:
 console.log(restar(10,3)); // Debería mostrar: 7
 console.log(modulo(10,3)); // Debería mostrar: 1
 
 console.log("\nEjercicio 21: Métodos");
 // Crear objeto 'banco' con métodos depositar, retirar y consultarSaldo
+
+const banco = {
+	balance: 1000,
+		depositar: function(quantity){
+		this.balance += quantity;
+		return this.balance;
+},
+		retirar: function(quantity){
+			if (this.balance > quantity){
+			this.balance -= quantity;
+				return this.balance;
+			}else {
+				console.log("No tienes saldo bro");
+				return this.saldo;}},
+
+		consultarSaldo: function() {
+			return this.balance;
+			}
+				};
+
 // Datos de prueba:
 console.log(banco.depositar(500)); // Debería mostrar: 1500
 console.log(banco.retirar(200));   // Debería mostrar: 1300
@@ -230,35 +304,72 @@ console.log(banco.consultarSaldo());// Debería mostrar: 1300
 
 console.log("\nEjercicio 22: Parámetros por defecto");
 // Crear función 'multiplicarPor' con factor por defecto = 2
+function multiplicarPor(n, fm = 2) {
+		return n*fm;
+}
+
 // Datos de prueba:
 console.log(multiplicarPor(5));    // Debería mostrar: 10
 console.log(multiplicarPor(5,3));  // Debería mostrar: 15
 
 console.log("\nEjercicio 23: Funciones que retornan valores");
 // Crear función 'esMultiploDe5'
+
+	function esMultiploDe5(n){
+		return n % 5 === 0;
+}
+
 // Datos de prueba:
 console.log(esMultiploDe5(10)); // Debería mostrar: true
 console.log(esMultiploDe5(7));  // Debería mostrar: false
 
 console.log("\nEjercicio 24: Arrow functions");
 // Convertir función tradicional en arrow function 'sumarDos'
+const sumarDos = (n)=> n + 2;
+
 // Datos de prueba:
 console.log(sumarDos(5)); // Debería mostrar: 7
 
 console.log("\nEjercicio 25: Funciones como argumentos");
 // Crear función 'aplicarOperacionAvanzada' que reciba dos números y una función
 // Datos de prueba:
+
+  function multiplicar(a,b){
+    return a*b;
+  }
+    function aplicarOperacionAvanzada(n1, n2, multiplicar){
+      return multiplicar(n1, n2);
+    }
 console.log(aplicarOperacionAvanzada(3,4,multiplicar)); // Debería mostrar: 12
 
 console.log("\nEjercicio 26: Closure simple");
 // Crear función 'generadorDeID' que devuelva IDs incrementales
+
+function generadorDeID(){
+  let id= 0;
+    return function(){
+      id++;
+      return id;
+    }
+}
+const nuevoID = generadorDeID();
 // Datos de prueba:
 console.log(nuevoID()); // Debería mostrar: 1
 console.log(nuevoID()); // Debería mostrar: 2
 console.log(nuevoID()); // Debería mostrar: 3
 
+
 console.log("\nEjercicio 27: Closure con configuración");
 // Crear función 'contadorInicial' que empiece desde un número inicial
+
+  function contadorInicial(inicio){
+    let contador= inicio;
+    return function(){
+      contador++;
+      return contador;
+    }
+  }
+  const contarDesde5= contadorInicial(5);
 // Datos de prueba:
 console.log(contarDesde5()); // Debería mostrar: 6
 console.log(contarDesde5()); // Debería mostrar: 7
@@ -269,17 +380,41 @@ console.log(contarDesde5()); // Debería mostrar: 7
 
 console.log("\nEjercicio 28: Condicional + bucle");
 // Crear función 'imprimirMultiplos' que reciba n y límite e imprima múltiplos de n
+
+function imprimirMultiplos(n, limit){
+      for(let i=n;i<= limit; i+=n){
+        console.log(i);
+      }
+}
 // Datos de prueba:
 imprimirMultiplos(3,15);
 // Debería imprimir: 3 6 9 12 15
 
 console.log("\nEjercicio 29: Array + condicional");
 // Crear función 'filtrarPares' que devuelva solo los números pares de un array
+
+function filtrarPares(array){
+  return array.filter(num => num % 2===0);
+    }
+
 // Datos de prueba:
 console.log(filtrarPares([1,2,3,4,5,6])); // Debería mostrar: [2,4,6]
 
 console.log("\nEjercicio 30: Objeto + map + función");
 // Crear función 'promediarEdades' que devuelva el promedio de edades de un array de personas
+//REVISAR
+function promediarEdades(grupo){
+  let prom=0;
+    for(let i= 0;i <grupo.length; i++){
+      prom += grupo[i].age;
+    }
+      return prom/grupo.length;
+}
 // Datos de prueba:
+const grupo = [
+    { name: 'Ana', age: 25 },
+    { name: 'Luis', age: 30 },
+    { name: 'Marta', age: 30 }
+];
 console.log(promediarEdades(grupo)); // Debería mostrar: 28.333333333333332
 
